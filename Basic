@@ -1,0 +1,45 @@
+Write-Host "	  v1.0.0.0_______________________________________________________		" -f red
+Write-Host "	 ( Hello, you have started a process with WhiteDragon ! Have Fun )		" -f red
+Write-Host "	  ---------------------------------------------------------------		" -f red
+Write-Host "      o                    / \  //\											" -f white
+Write-Host "       o    |\___/|      /   \//  \\										"
+Write-Host "            /0  0  \__  /    //  | \ \										"
+Write-Host "           /     /  \/_/    //   |  \  \									"
+Write-Host "           @_^_@'/   \/_   //    |   \   \									"
+Write-Host "           //_^_/     \/_ //     |    \    \								"
+Write-Host "        ( //) |        \///      |     \     \								"
+Write-Host "      ( / /) _|_ /   )  //       |      \     _\							"
+Write-Host "    ( // /) '/,_ _ _/  ( ; -.    |    _ _\.-~        .-~~~^-.				"
+Write-Host "  (( / / )) ,-{        _      `-.|.-~-.           .~         `.				"
+Write-Host " (( // / ))  '/\      /                 ~-. _ .-~      .-~^-.  \			"
+Write-Host " (( /// ))      `.   {            }                   /      \  \			"
+Write-Host "  (( / ))     .----~-.\        \-'                 .~         \  `. \^-.	"
+Write-Host "             ///.----..>        \             _ -~             `.  ^-`  ^-_	"
+Write-Host "               ///-._ _ _ _ _ _ _}^ - - - - ~                     ~-- ,.-~	"
+Write-Host "                                                                  /.-~		"
+while(1){
+	try
+	{
+		if (((get-process arma3server  -ErrorAction Stop).Count) == 1){
+			Write-Host "Sleeping for 60s" -f red
+			Start-Sleep -s 60
+		}
+	}	 
+	catch [System.Management.Automation.ActionPreferenceStopException]
+	{
+		Write-Host "Dragon has not find process" -f green
+		$process = "C:\Arma\Server\arma3server.exe"
+		$arguments = "-mod=@mods;  -servermod=@Server; -netlog -loadMissionToMemor -autoInit"
+		
+		If (-not (Test-Path $process)){
+			Write-Host "file not found" -f red
+			Exit
+		}
+		else{
+		  Write-Host "Starting process" -f green
+			Start-Process  -FilePath $process -ArgumentList $arguments -Wait -WindowStyle Minimized
+			Start-Sleep -s 5 
+		}
+		
+	}
+}
